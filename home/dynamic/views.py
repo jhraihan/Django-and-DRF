@@ -5,3 +5,6 @@ from django.shortcuts import render
 def index(request, pk):
     pk = pk
     return render(request, 'index.html', {'pk': pk})
+
+def show(request):
+    return render(request,'show.html')
