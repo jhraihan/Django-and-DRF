@@ -21,7 +21,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'dynamic'
+    'dynamic',
+    'rest_framework',
+    'aiven',
 ]
 
 MIDDLEWARE = [
