@@ -7,5 +7,10 @@ class Service(models.Model):
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Aiven Service'
+        verbose_name_plural = 'Aiven Services'
+
     def __str__(self):
-        return self.name
+        return f"{self.name} ({self.service_type})"

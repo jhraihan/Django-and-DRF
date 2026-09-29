@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -6,9 +6,17 @@ from .models import Service
 from .serializers import ServiceSerializer
 
 
-# Standard Django View
+# Standard Django Overview View
 def index(request):
-    return HttpResponse("Welcome to the Aiven App!")
+    services = Service.objects.all()
+    active_count = services.filter(is_active=True).count()
+    total_count = services.count()
+    context = {
+        'services': services,
+        'active_count': active_count,
+        'total_count': total_count,
+    }
+    return render(request, 'aiven/overview.html', context)
 
 
 # DRF Function View: List & Create

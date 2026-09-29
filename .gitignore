@@ -1,1 +1,37 @@
-/venv
+# Virtual environments
+/venv/
+venv/
+ENV/
+env/
+.venv/
+
+# Environment variables and secrets
+.env
+.env.*
+*.env
+
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django database & media
+*.sqlite3
+db.sqlite3
+media/
+
+# Static files directory (if collected)
+staticfiles/
+
+# Logs
+*.log
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS generated files
+.DS_Store
+Thumbs.db
