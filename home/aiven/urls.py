@@ -5,4 +5,6 @@ urlpatterns = [
     path('', views.index, name='aiven-index'),
     path('services/', views.service_list, name='service-list'),
     path('services/<int:pk>/', views.service_detail, name='service-detail'),
+    path('customers/', views.customer_list, name='customer-list'),
+    path('customers/<int:pk>/', views.customer_detail, name='customer-detail'),
 ]
