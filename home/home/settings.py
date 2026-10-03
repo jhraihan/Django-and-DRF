@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'dynamic',
     'rest_framework',
     'aiven',
+    'product',
 ]
 
 MIDDLEWARE = [
