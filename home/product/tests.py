@@ -1,5 +1,8 @@
-from django.test import TestCase
 from decimal import Decimal
+from django.test import TestCase
+from rest_framework import status
+from rest_framework.test import APITestCase
+
 from .models import Category, Product
 from .serializers import CategorySerializer, ProductSerializer
 
@@ -71,10 +74,6 @@ class SerializerTest(TestCase):
         serializer = ProductSerializer(data=data)
         self.assertFalse(serializer.is_valid())
         self.assertIn("price", serializer.errors)
-
-
-from rest_framework.test import APITestCase
-from rest_framework import status
 
 
 class ProductViewTest(APITestCase):

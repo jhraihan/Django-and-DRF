@@ -27,7 +27,7 @@ def product_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
 def product_detail(request, pk):
     """Retrieve, update, or delete a single product."""
     product = get_object_or_404(Product, pk=pk)
@@ -36,8 +36,9 @@ def product_detail(request, pk):
         serializer = ProductSerializer(product)
         return Response(serializer.data)
 
-    elif request.method == 'PUT':
-        serializer = ProductSerializer(product, data=request.data, partial=True)
+    elif request.method in ('PUT', 'PATCH'):
+        partial = request.method == 'PATCH' or True
+        serializer = ProductSerializer(product, data=request.data, partial=partial)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
