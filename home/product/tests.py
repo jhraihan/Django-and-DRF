@@ -3,8 +3,8 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from .models import Category, Product
-from .serializers import CategorySerializer, ProductSerializer
+from .models import Category, Product, Review
+from .serializers import CategorySerializer, ProductSerializer, ReviewSerializer
 
 
 class CategoryModelTest(TestCase):
@@ -39,6 +39,23 @@ class ProductModelTest(TestCase):
         self.assertEqual(self.product.stock, 15)
         self.assertTrue(self.product.is_available)
         self.assertEqual(self.product.category.name, "Accessories")
+
+
+class ReviewModelTest(TestCase):
+    def setUp(self):
+        self.category = Category.objects.create(name="Tech")
+        self.product = Product.objects.create(category=self.category, name="Mouse", price=Decimal("25.00"))
+        self.review = Review.objects.create(product=self.product, rating=5, comment="Great mouse!")
+
+    def test_review_str_and_fields(self):
+        self.assertEqual(str(self.review), "Mouse (5★)")
+        self.assertEqual(self.review.product.name, "Mouse")
+        self.assertEqual(self.review.rating, 5)
+
+    def test_review_serializer(self):
+        serializer = ReviewSerializer(self.review)
+        self.assertEqual(serializer.data["rating"], 5)
+        self.assertEqual(serializer.data["comment"], "Great mouse!")
 
 
 class SerializerTest(TestCase):
